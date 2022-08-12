@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.earthquake.map.dao.earthquakeData.EarthquakeDataDao">
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO tb_earthquake_data (eartgquake_id,date, time,latitude, longitude, type, depth,
+        magnitude, magnitude_type, magnitude_error, magnitude_seismic_stations,
+        azimuthal_gap,horizontal_distance,horizontal_error,root_mean_square,id,
+        source,location_source,magnitude_source,status,nation)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.eartgquakeId},#{item.date},#{item.time},#{item.latitude},#{item.longitude},
+            #{item.type},#{item.depth},
+            #{item.magnitude},#{item.magnitudeType},
+            #{item.magnitudeError},#{item.magnitudeSeismicStations},
+            #{item.azimuthalGap},#{item.horizontalDistance},
+            #{item.horizontalError},#{item.rootMeanSquare},
+            #{item.id},#{item.source},#{item.locationSource},
+            #{item.magnitudeSource},#{item.status},#{item.nation})
+        </foreach>
+    </insert>
+
+    <select id="getMark" parameterType="com.earthquake.map.vo.EarthquakeVo"
+            resultType="com.earthquake.map.vo.MarkVo">
+        select latitude,longitude,date,magnitude,nation from tb_earthquake_data
+        <where>
+            <if test="startDate!='' and startDate!=null">
+                date between #{startDate} and #{endDate}
+            </if>
+            <if test="depth!='' and depth!=null">
+                and depth = #{depth}
+            </if>
+            <if test="magnitude!='' and magnitude!=null">
+                and magnitude = #{magnitude}
+            </if>
+            <if test="nation!='' and nation!=null">
+                and nation = #{nation}
+            </if>
+            <if test="type!='' and type!=null">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="getNation" resultType="java.lang.String">
+        SELECT nation FROM tb_earthquake_data GROUP BY nation ORDER BY nation
+    </select>
+
+
+    <select id="getLnglat" resultType="com.earthquake.map.entity.Lnglat">
+        select * from tb_lnglat
+    </select>
+
+    <delete id="deleteData">
+        delete from tb_earthquake_data
+    </delete>
+</mapper>

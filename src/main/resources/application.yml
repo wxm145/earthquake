@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driverClass: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/earthquake?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    username: root
+    password: 888888
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  20MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+
+
+mybatis:
+  mapperLocations: classpath:/com/earthquake/map/dao/*/*.xml
+  typeAliasesPackage: com.earthquake.map.dao
+  configLocation: classpath:/mybatis-config.xml
+
