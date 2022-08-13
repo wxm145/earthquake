@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-03 10:48
- */
+
 public interface EarthquakeDataService {
 
     int insertBatch(InputStream InputStream) throws IOException, IllegalAccessException;

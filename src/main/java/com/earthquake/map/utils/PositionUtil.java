@@ -1,9 +1,6 @@
 package com.earthquake.map.utils;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-08 22:24
- */
+
 public class PositionUtil {
 
     public static double pi = 3.1415926535897932384626;
@@ -54,13 +51,7 @@ public class PositionUtil {
         return false;
     }
 
-    /**
-     * WGS-84 转 火星坐标系
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
+
     public static double[] gps84_To_Gcj02(double lat, double lon) {
         if (outOfChina(lat, lon)) {
             return new double[]{lat, lon};
@@ -79,13 +70,6 @@ public class PositionUtil {
     }
 
 
-    /**
-     * 火星坐标系 (GCJ-02) 转 WGS-84
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
     public static double[] gcj02_To_Gps84(double lat, double lon) {
         double[] gps = transform(lat, lon);
         double lontitude = lon * 2 - gps[1];
@@ -93,13 +77,7 @@ public class PositionUtil {
         return new double[]{latitude, lontitude};
     }
 
-    /**
-     * 火星坐标系 (GCJ-02) 转百度坐标系 (BD-09)
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
+
     public static double[] gcj02_To_Bd09(double lat, double lon) {
         double x = lon, y = lat;
         double z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
@@ -111,13 +89,7 @@ public class PositionUtil {
     }
 
 
-    /**
-     * 百度坐标系 (BD-09) 转 火星坐标系 (GCJ-02)
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
+
     public static double[] bd09_To_Gcj02(double lat, double lon) {
         double x = lon - 0.0065, y = lat - 0.006;
         double z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);
@@ -129,13 +101,7 @@ public class PositionUtil {
     }
 
 
-    /**
-     * 将gps84转为bd09
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
+
     public static double[] gps84_To_bd09(double lat, double lon) {
         double[] gcj02 = gps84_To_Gcj02(lat, lon);
         double[] bd09 = gcj02_To_Bd09(gcj02[0], gcj02[1]);
@@ -143,29 +109,16 @@ public class PositionUtil {
     }
 
 
-    /**
-     * bd09 转 84
-     *
-     * @param lat
-     * @param lon
-     * @return
-     */
     public static double[] bd09_To_gps84(double lat, double lon) {
         double[] gcj02 = bd09_To_Gcj02(lat, lon);
         double[] gps84 = gcj02_To_Gps84(gcj02[0], gcj02[1]);
-        //保留小数点后六位
         gps84[0] = retain6(gps84[0]);
         gps84[1] = retain6(gps84[1]);
         return gps84;
     }
 
 
-    /**
-     * 保留小数点后六位
-     *
-     * @param num
-     * @return
-     */
+
     private static double retain6(double num) {
         String result = String.format("%.6f", num);
         return Double.valueOf(result);
@@ -174,21 +127,13 @@ public class PositionUtil {
 
 
     public static double[] millerXY(double lon, double lat) {
-        //地球周长
         double L = 6381372 * Math.PI * 2;
-        // 平面展开后，x轴等于周长
         double W = L;
-        // y轴约等于周长一半
         double H = L / 2;
-        // 米勒投影中的一个常数，范围大约在正负2.3之间
         double mill = 2.3;
-        // 将经度从度数转换为弧度
         double x = lon * Math.PI / 180;
-        // 将纬度从度数转换为弧度
         double y = lat * Math.PI / 180;
-        // 米勒投影的转换
         y = 1.25 * Math.log(Math.tan(0.25 * Math.PI + 0.4 * y));
-        // 弧度转为实际距离
         x = (W / 2) + (W / (2 * Math.PI)) * x;
         y = (H / 2) - (H / (2 * mill)) * y;
         double[] result = new double[2];

@@ -9,10 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-03 10:48
- */
 @RestController
 @RequestMapping("earthquake")
 public class EarthquakeDataController {

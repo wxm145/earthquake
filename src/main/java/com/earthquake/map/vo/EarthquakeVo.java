@@ -2,10 +2,7 @@ package com.earthquake.map.vo;
 
 import lombok.Data;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-06 16:50
- */
+
 @Data
 public class EarthquakeVo {
     private String date;

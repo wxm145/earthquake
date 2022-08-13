@@ -153,7 +153,7 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
                                 case HSSFCell.CELL_TYPE_BLANK:
                                     break;
                                 case HSSFCell.CELL_TYPE_NUMERIC:
-                                    if (HSSFDateUtil.isCellDateFormatted(cell)) {   // 日期
+                                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
                                         Date date = cell.getDateCellValue();
                                         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                                         cellValue = sdf.format(date);
@@ -163,7 +163,7 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
                                     }
                                     break;
                                 case HSSFCell.CELL_TYPE_ERROR:
-                                    System.out.print("[数据类型错误]");
+                                    System.out.print("[Data type error]");
                                     break;
                             }
                             fields[cellNum].setAccessible(true);
@@ -218,13 +218,11 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
 
 
     public List<EarthquakeEntity> readExcel(InputStream fileInputStream) throws IOException, IllegalAccessException {
-        //FileInputStream fileInputStream = new FileInputStream("C:\\Users\\wxm19\\Desktop\\test.xlsx");//开启文件读取流
+
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);
-        // 获取标题内容
         Row rowTitle = sheet.getRow(0);
         if (rowTitle != null) {
-            // 读取多少列有数据
             int cellCount = rowTitle.getPhysicalNumberOfCells();
             for (int cellNum = 0; cellNum < cellCount; cellNum++) {
                 Cell cell = rowTitle.getCell(cellNum);
@@ -238,7 +236,6 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
 
         Field[] fields = new EarthquakeEntity().getClass().getDeclaredFields();
 
-        // 获取表中的内容
         List<EarthquakeEntity> earthquakeList = new ArrayList<>();
         int rowCount = sheet.getPhysicalNumberOfRows();
         for (int rowNum = 1; rowNum < rowCount; rowNum++) {
@@ -261,7 +258,7 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
                             case HSSFCell.CELL_TYPE_BLANK:
                                 break;
                             case HSSFCell.CELL_TYPE_NUMERIC:
-                                if (HSSFDateUtil.isCellDateFormatted(cell)) {   // 日期
+                                if (HSSFDateUtil.isCellDateFormatted(cell)) {
                                     Date date = cell.getDateCellValue();
                                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                                     cellValue = sdf.format(date);
@@ -271,7 +268,7 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
                                 }
                                 break;
                             case HSSFCell.CELL_TYPE_ERROR:
-                                System.out.print("[数据类型错误]");
+                                System.out.print("[Data type error]");
                                 break;
                         }
                         fields[cellNum].setAccessible(true);

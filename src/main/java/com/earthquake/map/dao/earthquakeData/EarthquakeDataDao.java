@@ -9,10 +9,7 @@ import com.earthquake.map.vo.MarkVo;
 
 import java.util.List;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-03 10:49
- */
+
 public interface EarthquakeDataDao extends BaseDao<EarthquakeEntity> {
     int insertBatch(List<EarthquakeEntity> list);
     List<MarkVo> getMark(EarthquakeVo earthquake);

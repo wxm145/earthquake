@@ -6,10 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-04 21:48
- */
+
 @Table(name = "tb_earthquake_data")
 public class EarthquakeEntity {
 

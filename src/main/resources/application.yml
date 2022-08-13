@@ -21,12 +21,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
-  # 文件上传
   servlet:
     multipart:
-      # 单个文件大小
       max-file-size:  20MB
-      # 设置总上传的文件大小
       max-request-size:  20MB
 
 

@@ -1,9 +1,6 @@
 package com.earthquake.map.utils;
 
-/**
- * @author wangxiaomiao
- * @create 2022-08-09 23:26
- */
+
 public class CountryUtil {
 
     public static String getCountryNameCnEnCodeByCountryCode(String countryCode) {
