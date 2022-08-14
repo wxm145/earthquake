@@ -63,5 +63,16 @@ public class EarthquakeDataController {
         }
     }
 
+    @GetMapping("getDepthAndMagnitude")
+    public R getDepthAndMagnitude() {
+        try {
+            return R.ok(earthquakeDataService.getDepthAndMagnitude());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.fail();
+        }
+    }
+
+
 
 }

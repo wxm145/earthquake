@@ -9,6 +9,7 @@ import com.earthquake.map.entity.EarthquakeEntity;
 import com.earthquake.map.entity.Lnglat;
 import com.earthquake.map.service.EarthquakeDataService;
 import com.earthquake.map.utils.PositionUtil;
+import com.earthquake.map.vo.DepthAndMagnitude;
 import com.earthquake.map.vo.EarthquakeVo;
 import com.earthquake.map.vo.MarkVo;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -83,6 +84,11 @@ public class EarthquakeDataServiceImpl implements EarthquakeDataService {
     @Override
     public List<String> getNation() {
         return earthquakeDataDao.getNation();
+    }
+
+    @Override
+    public DepthAndMagnitude getDepthAndMagnitude() {
+        return earthquakeDataDao.getDepthAndMagnitude();
     }
 
     public List<EarthquakeEntity> readExcel(String filePath) throws IOException, IllegalAccessException {

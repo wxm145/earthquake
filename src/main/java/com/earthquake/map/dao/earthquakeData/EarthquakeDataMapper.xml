@@ -28,11 +28,11 @@
             <if test="startDate!='' and startDate!=null">
                 date between #{startDate} and #{endDate}
             </if>
-            <if test="depth!='' and depth!=null">
-                and depth = #{depth}
+            <if test="minDepth!='' and minDepth!=null">
+                and depth between #{minDepth} and #{maxDepth}
             </if>
-            <if test="magnitude!='' and magnitude!=null">
-                and magnitude = #{magnitude}
+            <if test="minMagnitude!='' and minMagnitude!=null">
+                and magnitude between #{minMagnitude} and #{maxMagnitude}
             </if>
             <if test="nation!='' and nation!=null">
                 and nation = #{nation}
@@ -55,4 +55,10 @@
     <delete id="deleteData">
         delete from tb_earthquake_data
     </delete>
+
+    <select id="getDepthAndMagnitude" resultType="com.earthquake.map.vo.DepthAndMagnitude">
+        select min(depth) minDepth,max(depth) maxDepth, min(magnitude) minMagnitude,
+        max(magnitude) maxMagnitude
+        from tb_earthquake_data
+    </select>
 </mapper>

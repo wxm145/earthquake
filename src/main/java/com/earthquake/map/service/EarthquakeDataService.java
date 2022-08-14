@@ -2,6 +2,7 @@ package com.earthquake.map.service;
 
 import com.earthquake.map.entity.EarthquakeEntity;
 import com.earthquake.map.entity.TbUser;
+import com.earthquake.map.vo.DepthAndMagnitude;
 import com.earthquake.map.vo.EarthquakeVo;
 import com.earthquake.map.vo.MarkVo;
 
@@ -22,4 +23,6 @@ public interface EarthquakeDataService {
 
 
     List<String> getNation();
+
+    DepthAndMagnitude getDepthAndMagnitude();
 }

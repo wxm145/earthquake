@@ -4,6 +4,7 @@ import com.earthquake.map.common.BaseDao;
 import com.earthquake.map.entity.EarthquakeEntity;
 import com.earthquake.map.entity.Lnglat;
 import com.earthquake.map.entity.TbUser;
+import com.earthquake.map.vo.DepthAndMagnitude;
 import com.earthquake.map.vo.EarthquakeVo;
 import com.earthquake.map.vo.MarkVo;
 
@@ -16,4 +17,5 @@ public interface EarthquakeDataDao extends BaseDao<EarthquakeEntity> {
     List<String> getNation();
     List<Lnglat> getLnglat();
     int deleteData();
+    DepthAndMagnitude getDepthAndMagnitude();
 }
